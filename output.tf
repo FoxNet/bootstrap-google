@@ -1,5 +1,11 @@
-output "public_ip" {
+output "private_ip" {
   value       = google_compute_instance.bootstrap.network_interface.0.network_ip
+  description = "Private IP of bootstrap instance"
+  sensitive   = false
+}
+
+output "public_ip" {
+  value       = google_compute_instance.bootstrap.network_interface.0.access_config.0.nat_ip
   description = "Public IP of bootstrap instance"
   sensitive   = false
 }
