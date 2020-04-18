@@ -87,7 +87,8 @@ cat <<EOF > /etc/consul.d/bootstrap.json
     "default_policy": "deny",
     "enable_token_persistence": true,
     "tokens": {
-      "master": "${bootstrap_token}"
+      "master": "${bootstrap_token}",
+      "agent": "${bootstrap_token}"
     }
   },
   "encrypt": "${consul_encryption_key}",
@@ -104,8 +105,7 @@ EOF
 
 cat <<EOF > /etc/vault.d/bootstrap.json
 {
-  "storage": [ { "consul": { "address": "http://localhost:8500" } } ],
-  "consul": { "token": "${bootstrap_token}" },
+  "storage": [ { "consul": { "address": "http://localhost:8500", "token": "${bootstrap_token}" } } ],
   "listener": [
       { "tcp": { "address": "127.0.0.1:8200", "tls_disable": true } },
       { "tcp": { "address": "$${instance_ip_address}:8200", "tls_disable": true } }
@@ -113,7 +113,7 @@ cat <<EOF > /etc/vault.d/bootstrap.json
   "seal": {
     "gcpckms": {
       "project": "$${project_id}",
-      "region": "$${instance_region}",
+      "region": "$(get_instance_custom_metadata_value "vault-keyring-region")",
       "key_ring": "$(get_instance_custom_metadata_value "vault-keyring")",
       "crypto_key": "$(get_instance_custom_metadata_value "vault-cryptokey")"
     }
@@ -173,10 +173,12 @@ StartLimitBurst=3
 WantedBy=multi-user.target
 EOF
 
+echo "Starting Consul..."
 systemctl start consul
-systemctl start vault
 
 sleep 120
+echo "Starting Vaut..."
+systemctl start vault
 
 export VAULT_ADDR="http://127.0.0.1:8200"
 vault operator init \
