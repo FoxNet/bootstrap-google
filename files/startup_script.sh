@@ -176,9 +176,10 @@ EOF
 echo "Starting Consul..."
 systemctl start consul
 
-sleep 120
+sleep 10
 echo "Starting Vaut..."
 systemctl start vault
+sleep 10
 
 export VAULT_ADDR="http://127.0.0.1:8200"
 vault operator init \
