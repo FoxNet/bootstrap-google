@@ -106,7 +106,7 @@ resource "google_compute_instance" "bootstrap" {
     {
       domain                = var.domain
       bootstrap_token       = local.bootstrap_token
-      consul_encryption_key = local.consul_encryption_key
+      consul_encryption_key = base64encode(local.consul_encryption_key)
       consul_version        = var.consul_version
       vault_version         = var.vault_version
   })
