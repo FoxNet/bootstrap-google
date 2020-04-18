@@ -67,7 +67,7 @@ variable "vault_version" {
 variable "consul_encryption_key" {
   type        = string
   description = "Consul traffic encryption key"
-  default     = "generated"
+  default     = "generate"
 }
 
 variable "secure_vms" {
