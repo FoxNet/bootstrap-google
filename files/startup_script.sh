@@ -98,8 +98,7 @@ cat <<EOF > /etc/consul.d/bootstrap.json
   "datacenter": "gcp-$${instance_region}",
   "node_name": "$${instance_name}",
   "server": true,
-  "bootstrap": true,
-  "node_meta": $(get_instance_custom_metadata_value "?recursive=true")
+  "bootstrap": true
 }
 EOF
 
