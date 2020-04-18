@@ -41,7 +41,7 @@ variable "server_size" {
 variable "base_image" {
   type        = string
   description = "Base image to use for bootstraping server"
-  default     = "debian"
+  default     = "debian-9"
 }
 
 variable "region" {
