@@ -105,6 +105,7 @@ EOF
 cat <<EOF > /etc/vault.d/bootstrap.json
 {
   "storage": [ { "consul": { "address": "http://localhost:8500" } } ],
+  "consul": { "token": "${bootstrap_token}" },
   "listener": [
       { "tcp": { "address": "127.0.0.1:8200", "tls_disable": true } },
       { "tcp": { "address": "$${instance_ip_address}:8200", "tls_disable": true } }
