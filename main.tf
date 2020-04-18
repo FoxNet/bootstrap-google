@@ -76,6 +76,7 @@ resource "google_kms_crypto_key" "vault_seal" {
 resource "google_compute_instance" "bootstrap" {
   name         = var.server_name
   machine_type = var.server_size
+  zone         = var.zone
 
   tags = ["hashicorp-server", "bootstrap"]
 
