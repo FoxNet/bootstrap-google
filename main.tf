@@ -92,8 +92,8 @@ resource "google_compute_instance" "bootstrap" {
   }
 
   shielded_instance_config {
-    enable_secure_boot = true
-    enable_vtpm        = true
+    enable_secure_boot = contains(var.secure_vms, var.base_image)
+    enable_vtpm        = contains(var.secure_vms, var.base_image)
   }
 
   metadata_startup_script = templatefile(

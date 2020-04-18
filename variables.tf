@@ -41,7 +41,7 @@ variable "server_size" {
 variable "base_image" {
   type        = string
   description = "Base image to use for bootstraping server"
-  default     = "debian-9"
+  default     = "debian-10"
 }
 
 variable "region" {
@@ -68,4 +68,10 @@ variable "consul_encryption_key" {
   type        = string
   description = "Consul traffic encryption key"
   default     = "generated"
+}
+
+variable "secure_vms" {
+  type        = list(string)
+  description = "If `base_image` is found in this array, will use secure instance settings"
+  default     = ["debian-10"]
 }
