@@ -176,15 +176,11 @@ EOF
 systemctl start consul
 systemctl start vault
 
-# Sleep a random amount, then try to initialize Vault
-# This does check if Vault is already initialized
-sleep $[ ( $RANDOM % 30 )  + 10 ]s
+sleep 120
+
 export VAULT_ADDR="http://127.0.0.1:8200"
-if ! vault operator init -status
-then
-    vault operator init \
-        -recovery-shares=1 -recovery-threshold=1 \
-        -recovery-pgp-keys=keybase:reyu -root-token-pgp-key=keybase:reyu \
-        -format=json > /tmp/vault-recovery.json
-    consul kv put vault-recovery @/tmp/vault-recovery.json
-fi
+vault operator init \
+    -recovery-shares=1 -recovery-threshold=1 \
+    -recovery-pgp-keys=keybase:reyu -root-token-pgp-key=keybase:reyu \
+    -format=json > /tmp/vault-recovery.json
+consul kv put vault-recovery @/tmp/vault-recovery.json
