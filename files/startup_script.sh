@@ -48,7 +48,7 @@ apt-get -qq install --no-install-recommends curl unzip jq
 # Fetch Hashicorp signing key from Keybase
 curl -s https://keybase.io/hashicorp/pgp_keys.asc | gpg --import --quiet
 
-mkdir fetch ; cd fetch
+mkdir -p /tmp/fetch ; cd /tmp/fetch
 curl -s -O $CONSUL_ZIP_URL -O $CONSUL_CHECKSUM_URL -O $CONSUL_CHECKSUM_URL.sig
 curl -s -O $VAULT_ZIP_URL -O $VAULT_CHECKSUM_URL -O $VAULT_CHECKSUM_URL.sig
 
