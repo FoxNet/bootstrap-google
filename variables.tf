@@ -64,6 +64,21 @@ variable "vault_version" {
   default = "1.4.0-rc1"
 }
 
+variable "vault_recovery_threshold" {
+  type        = number
+  description = "Number of key shares required to reconstruct the recovery key"
+}
+
+variable "vault_recovery_pgp_keys" {
+  type        = string
+  description = "Generated unseal keys will be encrypted and base64-encoded in the order specified in this list"
+}
+
+variable "vault_root_token_pgp_key" {
+  type        = string
+  description = "Generated root token will be encrypted and base64-encoded with the given public key"
+}
+
 variable "consul_encryption_key" {
   type        = string
   description = "Consul traffic encryption key"

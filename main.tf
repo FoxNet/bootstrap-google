@@ -105,11 +105,15 @@ resource "google_compute_instance" "bootstrap" {
   metadata_startup_script = templatefile(
     "${path.module}/files/startup_script.sh",
     {
-      domain                = var.domain
-      bootstrap_token       = local.bootstrap_token
-      consul_encryption_key = base64encode(local.consul_encryption_key)
-      consul_version        = var.consul_version
-      vault_version         = var.vault_version
+      domain                   = var.domain
+      bootstrap_token          = local.bootstrap_token
+      consul_encryption_key    = base64encode(local.consul_encryption_key)
+      consul_version           = var.consul_version
+      vault_version            = var.vault_version
+      vault_recovery_shares    = length(split(",", var.vault_recovery_pgp_keys))
+      vault_recovery_threshold = var.vault_recovery_threshold
+      vault_recovery_pgp_keys  = var.vault_recovery_pgp_keys
+      vault_root_token_pgp_key = var.vault_root_token_pgp_key
   })
 
   service_account {

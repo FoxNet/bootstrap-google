@@ -183,7 +183,8 @@ sleep 10
 
 export VAULT_ADDR="http://127.0.0.1:8200"
 vault operator init \
-    -recovery-shares=1 -recovery-threshold=1 \
-    -recovery-pgp-keys=keybase:reyu -root-token-pgp-key=keybase:reyu \
+    -recovery-shares=${vault_recovery_shares} -recovery-threshold=${vault_recovery_threshold} \
+    -recovery-pgp-keys=${vault_recovery_pgp_keys} -root-token-pgp-key=${vault_root_token_pgp_key} \
     -format=json > /tmp/vault-recovery.json
+export CONSUL_HTTP_TOKEN=${bootstrap_token}
 consul kv put vault-recovery @/tmp/vault-recovery.json
