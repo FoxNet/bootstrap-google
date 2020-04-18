@@ -75,6 +75,7 @@ done
 
 for service in consul vault
 do
+    mkdir -p /etc/$${service}.d
     useradd --system --user-group --create-home --home-dir /var/lib/$service $service
 done
 
