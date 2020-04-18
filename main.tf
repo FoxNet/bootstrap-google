@@ -15,8 +15,8 @@ resource "random_password" "consul_encryption_key" {
 }
 
 locals {
-  bootstrap_token       = (var.bootstrap_token == "generated") ? random_uuid.bootstrap_token.result : var.bootstrap_token
-  consul_encryption_key = (var.consul_encryption_key == "generated") ? random_password.consul_encryption_key.result : var.consul_encryption_key
+  bootstrap_token       = (var.bootstrap_token == "generate") ? random_uuid.bootstrap_token.result : var.bootstrap_token
+  consul_encryption_key = (var.consul_encryption_key == "generate") ? random_password.consul_encryption_key.result : var.consul_encryption_key
 }
 
 /*****
