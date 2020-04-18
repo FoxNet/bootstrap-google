@@ -97,8 +97,9 @@ resource "google_compute_instance" "bootstrap" {
   }
 
   metadata = {
-    vault-keyring   = google_kms_key_ring.vault.name
-    vault-cryptokey = google_kms_crypto_key.vault_seal.name
+    vault-keyring        = google_kms_key_ring.vault.name
+    vault-keyring-region = google_kms_key_ring.region
+    vault-cryptokey      = google_kms_crypto_key.vault_seal.name
   }
 
   metadata_startup_script = templatefile(
