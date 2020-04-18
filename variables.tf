@@ -1,9 +1,3 @@
-variable "credentials_file" {
-  type        = string
-  description = "A credential file granting access to GCP"
-  default     = ""
-}
-
 variable "credentials" {
   type        = string
   description = "JSON credentials granting access to GCP"

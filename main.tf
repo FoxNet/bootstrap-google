@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file(var.credentials_file)
+  credentials = var.credentials
   project     = var.project_id
   version     = "~> 3.0.0"
 }
