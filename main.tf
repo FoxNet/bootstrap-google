@@ -96,6 +96,11 @@ resource "google_compute_instance" "bootstrap" {
     enable_vtpm        = contains(var.secure_vms, var.base_image)
   }
 
+  metadata = {
+    vault-keyring   = google_kms_key_ring.vault.name
+    vault-cryptokey = google_kms_crypto_key.vault_seal.name
+  }
+
   metadata_startup_script = templatefile(
     "${path.module}/files/startup_script.sh",
     {
