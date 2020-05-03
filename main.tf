@@ -53,6 +53,10 @@ resource "google_kms_key_ring" "vault" {
   name       = "vault-keyring"
   location   = "global"
   depends_on = [google_project_service.primary_cloudkms]
+
+  lifecycle {
+    prevent_destroy = false
+  }
 }
 
 resource "google_kms_key_ring_iam_policy" "vault_keyring" {
